@@ -120,12 +120,48 @@ h1,h2,h3,h4 { font-family: Fraunces, serif; letter-spacing: -0.02em; }
   border-radius: 28px;
   overflow: hidden;
   box-shadow: 0 60px 120px -40px rgba(0,0,0,0.8), 0 0 0 1px rgba(201,160,104,0.18);
+  background: #0B0D12;
 }
 .hero-frame::after{
   content:""; position:absolute; inset:0;
-  background: linear-gradient(180deg, rgba(11,13,18,0) 40%, rgba(11,13,18,0.75) 100%),
-              linear-gradient(90deg, rgba(11,13,18,0.55) 0%, rgba(11,13,18,0) 55%);
+  background: linear-gradient(180deg, rgba(11,13,18,0) 55%, rgba(11,13,18,0.75) 100%);
   pointer-events:none;
+}
+
+/* Browser mockup chrome */
+.browser-mockup {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #1B1E27;
+  border: 1px solid rgba(201,160,104,0.15);
+  box-shadow: 0 40px 90px -30px rgba(0,0,0,0.7);
+}
+.browser-mockup::before {
+  content: "";
+  display: block;
+  height: 28px;
+  background: #12141B;
+  border-bottom: 1px solid rgba(42,45,55,0.7);
+  background-image:
+    radial-gradient(circle, #ef5f57 0 5px, transparent 5px),
+    radial-gradient(circle, #febc2e 0 5px, transparent 5px),
+    radial-gradient(circle, #28c840 0 5px, transparent 5px);
+  background-position: 12px 14px, 30px 14px, 48px 14px;
+  background-repeat: no-repeat;
+}
+.browser-mockup .browser-url {
+  position: absolute;
+  top: 5px; left: 50%; transform: translateX(-50%);
+  height: 18px; padding: 0 12px;
+  background: #0B0D12;
+  border: 1px solid rgba(42,45,55,0.7);
+  border-radius: 4px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px; color: #6B6F7C;
+  display: flex; align-items: center; gap: 6px;
+  letter-spacing: 0.04em;
+  max-width: 60%;
 }
 
 /* Property card */
@@ -311,15 +347,22 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
     <!-- Hero visual -->
     <div class="lg:col-span-6 reveal relative">
       <div class="hero-frame aspect-[4/5] lg:aspect-[5/6]">
-        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1600&q=80" alt="Arquitectura residencial moderna — proyecto bandera Enova" class="absolute inset-0 w-full h-full object-cover"/>
-
-        <!-- Floating pill top-left -->
-        <div class="absolute top-6 left-6 flex items-center gap-2 z-10">
-          <span class="chip"><span class="dot-gold pulse"></span> Primer Hub operativo · Perú</span>
+        <!-- Browser chrome -->
+        <div class="absolute top-0 left-0 right-0 h-7 z-20" style="background: #12141B; border-bottom: 1px solid rgba(42,45,55,0.7);">
+          <div class="flex items-center h-full px-3 gap-1.5">
+            <span class="w-2.5 h-2.5 rounded-full" style="background:#ef5f57;"></span>
+            <span class="w-2.5 h-2.5 rounded-full" style="background:#febc2e;"></span>
+            <span class="w-2.5 h-2.5 rounded-full" style="background:#28c840;"></span>
+            <div class="absolute left-1/2 -translate-x-1/2 h-[18px] px-3 rounded flex items-center" style="background: #0B0D12; border: 1px solid rgba(42,45,55,0.7);">
+              <svg width="9" height="9" viewBox="0 0 10 10" fill="none" class="mr-1.5"><path d="M5 1 C 3 1 2 2 2 4 V5 H1 V9 H9 V5 H8 V4 C 8 2 7 1 5 1 Z" stroke="#6B6F7C" stroke-width="0.8" fill="none"/></svg>
+              <span class="font-mono text-[9.5px] text-mute tracking-wide">chiclayopropiedades.com</span>
+            </div>
+          </div>
         </div>
+        <img src="images/chiclayo-home.png" alt="Chiclayo Propiedades · Portal inmobiliario en operación" class="absolute inset-0 w-full h-full object-cover object-top" style="padding-top:28px;"/>
 
         <!-- Floating info bottom -->
-        <div class="absolute left-6 right-6 bottom-6 z-10 rounded-2xl p-5 lg:p-6" style="background: rgba(11,13,18,0.72); backdrop-filter: blur(10px); border: 1px solid rgba(201,160,104,0.22);">
+        <div class="absolute left-6 right-6 bottom-6 z-10 rounded-2xl p-5 lg:p-6" style="background: rgba(11,13,18,0.82); backdrop-filter: blur(10px); border: 1px solid rgba(201,160,104,0.28);">
           <div class="flex items-center justify-between gap-6">
             <div>
               <div class="font-mono text-[10.5px] tracking-[0.22em] uppercase text-goldsoft">Caso en vivo</div>
@@ -336,8 +379,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         </div>
       </div>
 
-      <!-- Decorative serif backdrop -->
-      <div class="hidden lg:block absolute -top-10 -left-10 font-serif italic text-[140px] text-goldwash/30 leading-none select-none pointer-events-none" aria-hidden="true" style="font-variation-settings:'opsz' 144; font-weight:300;">en<span class="text-gold/40">o</span>va</div>
     </div>
   </div>
 </section>
@@ -751,10 +792,22 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
   <div class="max-w-[1320px] mx-auto px-6 lg:px-10">
     <div class="grid lg:grid-cols-12 gap-14 items-center reveal">
       <div class="lg:col-span-6">
-        <div class="relative rounded-3xl overflow-hidden aspect-[4/5]" style="box-shadow: 0 40px 100px -30px rgba(0,0,0,0.8);">
-          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80" alt="Chiclayo Propiedades · Primer Hub operativo" class="w-full h-full object-cover"/>
-          <div class="absolute inset-0" style="background: linear-gradient(180deg, transparent 55%, rgba(11,13,18,0.9));"></div>
-          <div class="absolute bottom-6 left-6 right-6 flex items-end justify-between">
+        <div class="relative rounded-3xl overflow-hidden aspect-[4/5]" style="box-shadow: 0 40px 100px -30px rgba(0,0,0,0.8); background: #0B0D12;">
+          <!-- Browser chrome -->
+          <div class="absolute top-0 left-0 right-0 h-7 z-20" style="background: #12141B; border-bottom: 1px solid rgba(42,45,55,0.7);">
+            <div class="flex items-center h-full px-3 gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full" style="background:#ef5f57;"></span>
+              <span class="w-2.5 h-2.5 rounded-full" style="background:#febc2e;"></span>
+              <span class="w-2.5 h-2.5 rounded-full" style="background:#28c840;"></span>
+              <div class="absolute left-1/2 -translate-x-1/2 h-[18px] px-3 rounded flex items-center" style="background: #0B0D12; border: 1px solid rgba(42,45,55,0.7);">
+                <svg width="9" height="9" viewBox="0 0 10 10" fill="none" class="mr-1.5"><path d="M5 1 C 3 1 2 2 2 4 V5 H1 V9 H9 V5 H8 V4 C 8 2 7 1 5 1 Z" stroke="#6B6F7C" stroke-width="0.8" fill="none"/></svg>
+                <span class="font-mono text-[9.5px] text-mute tracking-wide">chiclayopropiedades.com/propiedades</span>
+              </div>
+            </div>
+          </div>
+          <img src="images/chiclayo-propiedades.png" alt="Propiedades reales publicadas en el portal de Chiclayo" class="absolute inset-0 w-full h-full object-cover object-top" style="padding-top:28px;"/>
+          <div class="absolute inset-0 pointer-events-none" style="background: linear-gradient(180deg, transparent 60%, rgba(11,13,18,0.9));"></div>
+          <div class="absolute bottom-6 left-6 right-6 flex items-end justify-between z-10">
             <div>
               <div class="font-mono text-[10.5px] tracking-[0.22em] uppercase text-goldsoft">Caso real · En vivo</div>
               <div class="mt-1 font-serif text-cream text-[22px]" style="font-variation-settings:'opsz' 144;">Chiclayo Propiedades · Perú</div>
