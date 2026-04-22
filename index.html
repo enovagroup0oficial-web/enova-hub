@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Enova — Ecosistemas de Innovación Inmobiliaria</title>
+<meta name="description" content="De inmobiliaria a Hub financiero regional. 5 fuentes de ingreso recurrentes. PropTech Ecosystem as a Service."/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        ink: '#0B0D12',        // near black
+        ink2: '#12141B',       // elevated
+        ink3: '#1B1E27',       // card
+        line: '#2A2D37',       // border
+        line2: '#3A3E4A',
+        gold: '#C9A068',       // primary warm gold
+        goldsoft: '#D8B07A',
+        goldwash: '#8A7247',
+        cream: '#EFE7D6',
+        body: '#B9BCC6',
+        mute: '#6B6F7C',
+      },
+      fontFamily: {
+        serif: ['Fraunces', 'serif'],
+        sans: ['Inter', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+      },
+    },
+  },
+};
+</script>
+
+<style>
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: Inter, sans-serif;
+  background: #0B0D12;
+  color: #B9BCC6;
+  font-weight: 300;
+}
+h1,h2,h3,h4 { font-family: Fraunces, serif; letter-spacing: -0.02em; }
+::selection { background: #C9A068; color: #0B0D12; }
+
+/* Ambient radial glows */
+.glow-hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(900px 600px at 82% 18%, rgba(201,160,104,0.22), transparent 60%),
+    radial-gradient(700px 500px at 12% 90%, rgba(201,160,104,0.08), transparent 60%);
+}
+.glow-band::before{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background: radial-gradient(1200px 400px at 50% 50%, rgba(201,160,104,0.14), transparent 70%);
+}
+
+/* Hairline dividers with gold accent */
+.rule-gold { position: relative; }
+.rule-gold::before{
+  content:""; position:absolute; left:0; right:0; top:0; height:1px;
+  background: linear-gradient(90deg, transparent, rgba(201,160,104,0.55), transparent);
+}
+
+/* Editorial display */
+.display {
+  font-family: Fraunces, serif;
+  font-weight: 400;
+  font-variation-settings: "opsz" 144;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+.italic-accent {
+  font-style: italic;
+  font-weight: 300;
+  color: #D8B07A;
+  font-variation-settings: "opsz" 144;
+}
+
+/* Eyebrow */
+.eyebrow {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+  color: #C9A068;
+}
+
+/* CTA */
+.btn-gold {
+  background: #C9A068; color: #0B0D12;
+  border-radius: 999px;
+  transition: transform .25s ease, background-color .25s ease, box-shadow .3s ease;
+  box-shadow: 0 10px 40px -12px rgba(201,160,104,0.55), inset 0 1px 0 rgba(255,255,255,0.25);
+}
+.btn-gold:hover { background:#D8B07A; box-shadow: 0 16px 50px -12px rgba(201,160,104,0.75), inset 0 1px 0 rgba(255,255,255,0.3); }
+.btn-ghost {
+  border: 1px solid rgba(201,160,104,0.55); color:#EFE7D6;
+  border-radius: 999px;
+  transition: background-color .25s ease, border-color .25s ease;
+}
+.btn-ghost:hover { background: rgba(201,160,104,0.1); border-color:#C9A068; }
+
+/* Play circle */
+.play-btn {
+  width: 44px; height: 44px; border-radius: 999px;
+  border: 1px solid rgba(201,160,104,0.65);
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background-color .25s ease;
+}
+.play-btn:hover { background: rgba(201,160,104,0.12); }
+
+/* Hero image frame */
+.hero-frame {
+  position: relative;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 60px 120px -40px rgba(0,0,0,0.8), 0 0 0 1px rgba(201,160,104,0.18);
+}
+.hero-frame::after{
+  content:""; position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(11,13,18,0) 40%, rgba(11,13,18,0.75) 100%),
+              linear-gradient(90deg, rgba(11,13,18,0.55) 0%, rgba(11,13,18,0) 55%);
+  pointer-events:none;
+}
+
+/* Property card */
+.card {
+  position: relative; border-radius: 20px; overflow: hidden;
+  background: #12141B;
+  border: 1px solid #2A2D37;
+  transition: transform .5s cubic-bezier(.2,.7,.2,1), border-color .3s ease;
+}
+.card:hover { transform: translateY(-4px); border-color: #3A3E4A; }
+.card-media { position: relative; aspect-ratio: 4/3; overflow: hidden; }
+.card-media img { width:100%; height:100%; object-fit: cover; transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
+.card:hover .card-media img { transform: scale(1.04); }
+.card-media::after{
+  content:""; position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(11,13,18,0) 50%, rgba(11,13,18,0.85) 100%);
+}
+
+/* Decorative underline swash */
+.swash { position: relative; display: inline-block; }
+.swash::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -14px;
+  height: 18px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 18' fill='none'><path d='M2 12 C 40 2, 80 2, 120 10 C 160 18, 200 14, 238 6' stroke='%23C9A068' stroke-width='1.2' stroke-linecap='round'/></svg>");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  opacity: .9;
+}
+
+/* Ornament */
+.ornament {
+  display:inline-flex; align-items:center; gap:12px;
+  color: #8A7247;
+}
+.ornament::before, .ornament::after {
+  content:""; width:36px; height:1px; background: linear-gradient(90deg, transparent, #8A7247, transparent);
+}
+
+/* Nav */
+.nav-bg { background: rgba(11,13,18,0.6); backdrop-filter: blur(14px) saturate(140%); -webkit-backdrop-filter: blur(14px) saturate(140%); border-bottom: 1px solid rgba(42,45,55,0.7); }
+
+/* Reveal */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* FAQ */
+details > summary { list-style: none; cursor: pointer; }
+details > summary::-webkit-details-marker { display: none; }
+.chev { transition: transform .3s ease; }
+details[open] .chev { transform: rotate(180deg); }
+.faq-item { border-top: 1px solid #2A2D37; }
+.faq-item:last-child { border-bottom: 1px solid #2A2D37; }
+details .faq-body { max-height: 0; overflow: hidden; opacity: 0; transition: max-height .5s ease, opacity .35s ease, padding .35s ease; }
+details[open] .faq-body { max-height: 500px; opacity: 1; }
+
+/* Grain */
+.grain::before {
+  content:""; position:absolute; inset:0; pointer-events:none; opacity:.035;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* Logo */
+.logo-o { color: #C9A068; font-style: italic; }
+
+/* Responsive headings */
+.h-hero { font-size: clamp(52px, 7.6vw, 104px); }
+.h-section { font-size: clamp(40px, 5.2vw, 72px); }
+
+/* Stat row */
+.stat-num {
+  font-family: Fraunces, serif; font-variation-settings: "opsz" 144;
+  font-weight: 400;
+  color: #EFE7D6;
+  font-size: clamp(56px, 7vw, 92px); line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+/* Chip */
+.chip {
+  display:inline-flex; align-items:center; gap:8px;
+  padding: 6px 12px; border-radius:999px;
+  background: rgba(201,160,104,0.08);
+  border: 1px solid rgba(201,160,104,0.3);
+  color:#D8B07A; font-size:11px; font-family:"JetBrains Mono",monospace; letter-spacing:0.18em; text-transform:uppercase;
+}
+.dot-gold { width:6px; height:6px; border-radius:999px; background:#C9A068; box-shadow: 0 0 0 4px rgba(201,160,104,0.18); }
+
+/* Search bar */
+.search-tabs button {
+  padding: 10px 22px; border-radius:10px; font-size:13px; letter-spacing:0.04em;
+}
+.search-tabs .on { background:#0B0D12; color:#EFE7D6; }
+.search-tabs .off { color:#B9BCC6; }
+
+/* ticker glow on dot */
+@keyframes pulse-dot { 0%,100%{ box-shadow:0 0 0 0 rgba(201,160,104,0.45);} 70%{ box-shadow:0 0 0 10px rgba(201,160,104,0);} }
+.pulse { animation: pulse-dot 2.2s ease-out infinite; }
+
+/* focus */
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid #C9A068; outline-offset: 3px; border-radius: 6px; }
+
+/* Section heading line accent */
+.heading-line {
+  width: 56px; height: 1px; background: linear-gradient(90deg, #C9A068, transparent);
+  display: block; margin: 0 auto 24px;
+}
+</style>
+</head>
+
+<body class="bg-ink text-body">
+
+<!-- ================= NAV ================= -->
+<header id="nav" class="nav-bg fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-[1320px] mx-auto px-6 lg:px-10 h-[76px] flex items-center justify-between">
+    <a href="#top" class="flex items-center" aria-label="Enova">
+      <span class="font-serif text-[26px] text-cream tracking-tight" style="font-variation-settings:'opsz' 144; font-weight:500;">en<span class="logo-o">o</span>va</span>
+    </a>
+    <nav aria-label="Principal" class="hidden md:flex items-center gap-10 text-[13.5px] text-body">
+      <a href="#metodo" class="hover:text-cream transition-colors">Método</a>
+      <a href="#fuentes" class="hover:text-cream transition-colors">Fuentes</a>
+      <a href="#resultados" class="hover:text-cream transition-colors">Resultados</a>
+      <a href="#faq" class="hover:text-cream transition-colors">FAQ</a>
+    </nav>
+    <a href="#cta-final" class="btn-gold inline-flex items-center gap-2 px-5 py-3 text-[13px] font-medium tracking-wide">
+      Agendar diagnóstico
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5L11 7 7.5 10.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ================= HERO ================= -->
+<section class="relative pt-[120px] pb-[120px] lg:pt-[150px] lg:pb-[140px] overflow-hidden glow-hero">
+  <div class="max-w-[1320px] mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-14 items-center relative">
+    
+    <div class="lg:col-span-6 reveal">
+      <div class="ornament mb-8">
+        <span class="font-mono text-[11px] tracking-[0.32em] uppercase">PropTech · Ecosystem as a Service</span>
+      </div>
+
+      <h1 class="display h-hero text-cream">
+        Deja de ser una<br/>
+        inmobiliaria.<br/>
+        <span class="italic-accent">Sé el Hub</span> de tu ciudad.
+      </h1>
+
+      <p class="mt-10 text-[18px] lg:text-[19px] leading-[1.7] text-body max-w-[560px] font-light">
+        El mercado regional ya es tuyo — solo que todavía no lo estás cobrando. <span class="text-cream">Cinco fuentes de ingreso recurrentes</span> dormidas en tu red. Una infraestructura que las enciende en 30 días.
+      </p>
+
+      <div class="mt-12 flex flex-wrap items-center gap-5">
+        <a href="#cta-final" class="btn-gold inline-flex items-center gap-2 px-7 h-[54px] text-[14px] font-medium tracking-wide">
+          Agendar mi diagnóstico
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5L11 7 7.5 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#metodo" class="inline-flex items-center gap-3 text-cream text-[14px]">
+          <span class="play-btn" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="#C9A068"><path d="M3 2 L10 6 L3 10 Z"/></svg>
+          </span>
+          Ver el Protocolo
+        </a>
+      </div>
+
+      <!-- Meta -->
+      <div class="mt-16 pt-8 border-t border-line grid grid-cols-3 gap-8 max-w-[520px]">
+        <div>
+          <div class="font-serif text-cream text-[28px]" style="font-variation-settings:'opsz' 144; font-weight:500;">05</div>
+          <div class="mt-1 font-mono text-[10.5px] tracking-[0.2em] uppercase text-mute">Fuentes de ingreso</div>
+        </div>
+        <div>
+          <div class="font-serif text-cream text-[28px]" style="font-variation-settings:'opsz' 144; font-weight:500;">30 <span class="text-body text-[18px]">días</span></div>
+          <div class="mt-1 font-mono text-[10.5px] tracking-[0.2em] uppercase text-mute">A operación</div>
+        </div>
+        <div>
+          <div class="font-serif text-cream text-[28px]" style="font-variation-settings:'opsz' 144; font-weight:500;">01<span class="text-goldsoft"> / </span><span class="text-body text-[18px]">ciudad</span></div>
+          <div class="mt-1 font-mono text-[10.5px] tracking-[0.2em] uppercase text-mute">Exclusividad regional</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero visual -->
+    <div class="lg:col-span-6 reveal relative">
+      <div class="hero-frame aspect-[4/5] lg:aspect-[5/6]">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1600&q=80" alt="Arquitectura residencial moderna — proyecto bandera Enova" class="absolute inset-0 w-full h-full object-cover"/>
+
+        <!-- Floating pill top-left -->
+        <div class="absolute top-6 left-6 flex items-center gap-2 z-10">
+          <span class="chip"><span class="dot-gold pulse"></span> Hub activo · LATAM</span>
+        </div>
+
+        <!-- Floating info bottom -->
+        <div class="absolute left-6 right-6 bottom-6 z-10 rounded-2xl p-5 lg:p-6" style="background: rgba(11,13,18,0.72); backdrop-filter: blur(10px); border: 1px solid rgba(201,160,104,0.22);">
+          <div class="flex items-center justify-between gap-6">
+            <div>
+              <div class="font-mono text-[10.5px] tracking-[0.22em] uppercase text-goldsoft">Caso en marcha</div>
+              <div class="mt-1.5 font-serif text-cream text-[20px] lg:text-[22px]" style="font-variation-settings:'opsz' 144;">Hub Inmobiliario · Cono Sur</div>
+              <div class="mt-1 text-[12.5px] text-body">42 agentes · Despliegue Q1 · Confidencial</div>
+            </div>
+            <div class="text-right shrink-0">
+              <div class="font-serif text-cream text-[28px]" style="font-variation-settings:'opsz' 144; font-weight:500;">+38<span class="text-goldsoft">%</span></div>
+              <div class="font-mono text-[10px] tracking-[0.22em] uppercase text-mute">Ingreso recurrente</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decorative serif backdrop -->
+      <div class="hidden lg:block absolute -top-10 -left-10 font-serif italic text-[140px] text-goldwash/30 leading-none select-none pointer-events-none" aria-hidden="true" style="font-variation-settings:'opsz' 144; font-weight:300;">en<span class="text-gold/40">o</span>va</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRUST BAR ================= -->
+<section class="relative py-10 border-y border-line/80">
+  <div class="max-w-[1320px] mx-auto px-6 lg:px-10">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-10">
+      <div class="flex-1 text-center md:text-left font-mono text-[12px] tracking-[0.2em] text-cream">10—50 AGENTES EN 1 RED</div>
+      <div class="hidden md:block w-px h-10 bg-gold/30"></div>
+      <div class="flex-1 text-center font-mono text-[12px] tracking-[0.2em] text-cream">5 INGRESOS RECURRENTES</div>
+      <div class="hidden md:block w-px h-10 bg-gold/30"></div>
+      <div class="flex-1 text-center md:text-right font-mono text-[12px] tracking-[0.2em] text-cream">30 DÍAS A OPERACIÓN</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROBLEMA ================= -->
+<section id="diagnostico" class="relative py-[120px] lg:py-[160px] overflow-hidden">
+  <div class="max-w-[1320px] mx-auto px-6 lg:px-10">
+    <div class="text-center reveal">
+      <div class="eyebrow mb-5">El Diagnóstico</div>
+      <h2 class="display h-section text-cream max-w-[900px] mx-auto">
+        El techo <span class="italic-accent">invisible</span><br/>de las inmobiliarias líderes.
+      </h2>
+      <p class="mt-8 text-[17px] leading-[1.75] text-body max-w-[640px] mx-auto font-light">
+        No es falta de leads. No es el equipo. Es cómo está diseñado tu negocio. Tres verdades que ya sabes — pero que no has mirado de frente.
+      </p>
+    </div>
+
+    <div class="mt-20 grid lg:grid-cols-3 gap-6 reveal">
+      <article class="card p-8 lg:p-10 flex flex-col">
+        <div class="flex items-start justify-between">
+          <span class="font-serif text-[64px] text-gold" style="font-variation-settings:'opsz' 144; font-weight:400;">01</span>
+          <span class="font-mono text-[10px] tracking-[0.28em] uppercase text-mute mt-3">Dependencia</span>
+        </div>
+        <h3 class="mt-8 font-serif text-[24px] leading-[1.2] text-cream" style="font-variation-settings:'opsz' 144; font-weight:500;">
+          Dependes de plataformas <span class="italic-accent">que no controlas.</span>
+        </h3>
+        <p class="mt-5 text-[14.5px] leading-[1.75] text-body font-light">
+          Meta te sube el CPL. Google te cambia el algoritmo. Idealista, Inmuebles24, Lamudi te aprietan el margen. Mientras tu crecimiento dependa de canales ajenos, tu techo lo decide alguien más.
+        </p>
+      </article>
+
+      <article class="card p-8 lg:p-10 flex flex-col">
+        <div class="flex items-start justify-between">
+          <span class="font-serif text-[64px] text-gold" style="font-variation-settings:'opsz' 144; font-weight:400;">02</span>
+          <span class="font-mono text-[10px] tracking-[0.28em] uppercase text-mute mt-3">Monetización</span>
+        </div>
+        <h3 class="mt-8 font-serif text-[24px] leading-[1.2] text-cream" style="font-variation-settings:'opsz' 144; font-weight:500;">
+          Cobras una sola vez. <span class="italic-accent">Cuando vendes.</span>
+        </h3>
+        <p class="mt-5 text-[14.5px] leading-[1.75] text-body font-light">
+          Tu base tiene miles de contactos. Pero solo cobras cuando vendes. Publicaciones de propietarios, membresías de agentes, cursos, servicios profesionales y publicidad — cinco fuentes que ya existen en tu red. Nadie las está cobrando.
+        </p>
+      </article>
+
+      <article class="card p-8 lg:p-10 flex flex-col">
+        <div class="flex items-start justify-between">
+          <span class="font-serif text-[64px] text-gold" style="font-variation-settings:'opsz' 144; font-weight:400;">03</span>
+          <span class="font-mono text-[10px] tracking-[0.28em] uppercase text-mute mt-3">Fuga</span>
+        </div>
+        <h3 class="mt-8 font-serif text-[24px] leading-[1.2] text-cream" style="font-variation-settings:'opsz' 144; font-weight:500;">
+          Tu cartera se va con <span class="italic-accent">quien la trabaja.</span>
+        </h3>
+        <p class="mt-5 text-[14.5px] leading-[1.75] text-body font-light">
+          El WhatsApp está en su celular. El Excel en su laptop. Los clientes lo siguen a él. El día que se va, se lleva el 30% de tu facturación. No construiste una inmobiliaria — construiste un empleo para tu mejor vendedor.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STATS ROW ================= -->
+<section class="relative py-20 border-y border-line/70 overflow-hidden glow-band">
+  <div class="max-w-[1320px] mx-auto px-6 lg:px-10 relative">
+    <div class="grid md:grid-cols-4 gap-10 reveal">
+      <div class="flex items-center gap-5">
+        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true" class="shrink-0">
+          <rect x="2" y="2" width="40" height="40" rx="10" stroke="#C9A068" stroke-width="1"/>
+          <path d="M14 22 L20 28 L30 16" stroke="#C9A068" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div>
+          <div class="stat-num">05<span class="text-gold">x</span></div>
+          <div class="mt-1 text-[13px] text-body">Fuentes de ingreso paralelas</div>
+        </div>
+      </div>
+      <div class="flex items-center gap-5">
+        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true" class="shrink-0">
+          <rect x="2" y="2" width="40" height="40" rx="10" stroke="#C9A068" stroke-width="1"/>
+          <path d="M22 13 V22 L28 26" stroke="#C9A068" stroke-width="1.4" stroke-linecap="round"/>
+          <circle cx="22" cy="22" r="10" stroke="#C9A068" stroke-width="1"/>
+        </svg>
+        <div>
+          <div class="stat-num">30<span class="text-gold text-[40px] align-top">d</span></div>
+          <div class="mt-1 text-[13px] text-body">De firma a operación</div>
+        </div>
+      </div>
+      <div class="flex items-center gap-5">
+        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true" class="shrink-0">
+          <rect x="2" y="2" width="40" height="40" rx="10" stroke="#C9A068" stroke-width="1"/>
+          <path d="M13 28 L19 20 L24 24 L31 14" stroke="#C9A068" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="31" cy="14" r="1.5" fill="#C9A068"/>
+        </svg>
+        <div>
+          <div class="stat-num">+38<span class="text-gold">%</span></div>
+          <div class="mt-1 text-[13px] text-body">Ingreso recurrente · caso piloto</div>
+        </div>
+      </div>
+      <div class="flex items-center gap-5">
+        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true" class="shrink-0">
+          <rect x="2" y="2" width="40" height="40" rx="10" stroke="#C9A068" stroke-width="1"/>
+          <path d="M22 12 L30 16 V24 C30 28 26 31 22 32 C18 31 14 28 14 24 V16 Z" stroke="#C9A068" stroke-width="1.2"/>
+        </svg>
+        <div>
+          <div class="stat-num">01<span class="text-gold text-[40px] align-top">/ciudad</span></div>
+          <div class="mt-1 text-[13px] text-body">Exclusividad regional</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MÉTODO ================= -->
+<section id="metodo" class="relative py-[120px] lg:py-[160px] overflow-hidden">
+  <div class="max-w-[1320px] mx-auto px-6 lg:px-10">
+    <div class="text-center reveal">
+      <div class="eyebrow mb-5">El Protocolo</div>
+      <h2 class="display h-section text-cream max-w-[880px] mx-auto">
+        De inmobiliaria a Hub<br/>regional en <span class="italic-accent">30 días.</span>
+      </h2>
+      <p class="mt-8 text-[17px] leading-[1.75] text-body max-w-[640px] mx-auto font-light">
+        No es software que se instala. Es el sistema operativo de tu negocio, rediseñado.
+      </p>
+    </div>
+
+    <div class="mt-20 grid lg:grid-cols-3 gap-8 reveal">
+      <!-- Step 01 -->
+      <div class="relative p-10 rounded-2xl border border-line bg-ink2/60">
+        <div class="flex items-center justify-between mb-8">
+          <div class="font-mono text-[10.5px] tracking-[0.3em] uppercase text-goldsoft">Fase 01 · 3–5 días</div>
+          <div class="w-10 h-10 rounded-full border border-gold/50 flex items-center justify-center text-gold font-serif text-[15px]" style="font-variation-settings:'opsz' 144;">01</div>
+        </div>
+        <h3 class="font-serif text-[26px] leading-[1.2] text-cream" style="font-variation-settings:'opsz' 144; font-weight:500;">
+          Auditoría de<br/><span class="italic-accent">activos dormidos.</span>
+        </h3>
+        <p class="mt-5 text-[14.5px] leading-[1.75] text-body font-light">
+          Mapeamos tu base de datos, tu red de agentes y tus canales existentes. Identificamos las 5 fuentes de ingreso paralelas que ya están vivas en tu negocio sin que las estés monetizando.
+        </p>
+      </div>
+
+      <!-- Step 02 -->
+      <div class="relative p-10 rounded-2xl border border-line bg-ink2/60">
+        <div class="flex items-center justify-between mb-8">
+          <div class="font-mono text-[10.5px] tracking-[0.3em] uppercase text-goldsoft">Fase 02 · 7–14 días</div>
+          <div class="w-10 h-10 rounded-full border border-gold/50 flex items-center justify-center text-gold font-serif text-[15px]" style="font-variation-settings:'opsz' 144;">02</div>
+        </div>
+        <h3 class="font-serif text-[26px] leading-[1.2] text-cream" style="font-variation-settings:'opsz' 144; font-weight:500;">
+          Despliegue<br/><span class="italic-accent">del Hub.</span>
+        </h3>
+        <p class="mt-5 text-[14.5px] leading-[1.75] text-body font-light">
+          Centralizamos conversaciones, contactos, seguimiento y trazabilidad en la plataforma propia de tu inmobiliaria. El dato deja de vivir en celulares ajenos. Empieza a vivir en tu infraestructura.
+        </p>
+      </div>
+
+      <!-- Step 03 -->
+      <div class="relative p-10 rounded-2xl border border-gold/35 bg-ink2/60" style="box-shadow: 0 30px 80px -30px rgba(201,160,104,0.25);">
+        <div class="flex items-center justify-between mb-8">
+          <div class="font-mono text-[10.5px] tracking-[0.3em] uppercase text-goldsoft">Fase 03 · 7–14 días</div>
+          <div class="w-10 h-10 rounded-full bg-gold flex items-center justify-center text-ink font-serif text-[15px]" style="font-variation-settings:'opsz' 144;">03</div>
+        </div>
+        <h3 class="font-serif text-[26px] leading-[1.2] text-cream" style="font-variation-settings:'opsz' 144; font-weight:500;">
+          Activación de<br/><span class="italic-accent">las 5 fuentes.</span>
+        </h3>
+        <p class="mt-5 text-[14.5px] leading-[1.75] text-body font-light">
+          Cinco motores de ingreso encendidos en paralelo: propietarios particulares (FSBO), agentes externos con membresía, educación y cursos, servicios profesionales adyacentes, publicidad de marcas terceras.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LAS 5 FUENTES ================= -->
+<section id="fuentes" class="relative py-[120px] lg:py-[160px] overflow-hidden">
+  <div class="max-w-[1320px] mx-auto px-6 lg:px-10">
+    <div class="text-center reveal max-w-[900px] mx-auto">
+      <div class="eyebrow mb-5">Las 5 Fuentes</div>
+      <h2 class="display h-section text-cream">Los cinco motores que<br/><span class="italic-accent">encendemos</span> en tu inmobiliaria.</h2>
+      <p class="mt-8 text-[17px] leading-[1.75] text-body max-w-[680px] mx-auto font-light">
+        No son servicios sueltos. Son cinco categorías estructurales que convierten tu red en una plataforma multi-ingreso.
+      </p>
+    </div>
+
+    <div class="mt-20 grid lg:grid-cols-6 gap-6 reveal">
+      <article class="lg:col-span-3 rounded-2xl border border-line bg-ink2/60 p-10 flex flex-col gap-6">
+        <div class="flex items-start justify-between">
+          <span class="font-serif text-[68px] text-gold" style="font-variation-settings:'opsz' 144; font-weight:400; line-height:1;">01</span>
+          <span class="font-mono text-[10px] tracking-[0.3em] text-goldsoft mt-3">QUIÉN PAGA · CÓMO</span>
+        </div>
+        <h3 class="font-serif text-[26px] leading-[1.2] text-cream" style="font-variation-settings:'opsz' 144; font-weight:500;">Propietarios <span class="italic-accent">particulares.</span></h3>
+        <p class="text-[14.5px] leading-[1.75] text-body font-light">El dueño que no quiere pagar comisión tradicional publica directo en tu plataforma. Pagas por imagen, por paquete o por período.</p>
+      </article>
+
+      <article class="lg:col-span-3 rounded-2xl border border-line bg-ink2/60 p-10 flex flex-col gap-6">
+        <div class="flex items-start justify-between">
+          <span class="font-serif text-[68px] text-gold" style="font-variation-settings:'opsz' 144; font-weight:400; line-height:1;">02</span>
+          <span class="font-mono text-[10px] tracking-[0.3em] text-goldsoft mt-3">AGENTES · MEMBRESÍA</span>
+        </div>
+        <h3 class="font-serif text-[26px] leading-[1.2] text-cream" style="font-variation-settings:'opsz' 144; font-weight:500;">Agentes <span class="italic-accent">externos.</span></h3>
+        <p class="text-[14.5px] leading-[1.75] text-body font-light">Membresía anual para listar propiedades en tu plataforma y acceder a la red. Tu inmobiliaria se vuelve el lugar donde operan todos los agentes serios de la ciudad.</p>
+      </article>
+
+      <article class="lg:col-span-2 rounded-2xl border border-line bg-ink2/60 p-10 flex flex-col gap-6">
+        <div class="flex items-start justify-between">
+          <span class="font-serif text-[68px] text-gold" style="font-variation-settings:'opsz' 144; font-weight:400; line-height:1;">03</span>
+          <span class="font-mono text-[10px] tracking-[0.3em] text-goldsoft mt-3">EDUCACIÓN</span>
+        </div>
+        <h3 class="font-serif text-[24px] leading-[1.2] text-cream" style="font-variation-settings:'opsz' 144; font-weight:500;">Formación <span class="italic-accent">monetizada.</span></h3>
+        <p class="text-[14.5px] leading-[1.75] text-body font-light">Cursos, certificaciones y formación a través de la plataforma. Te posicionas como la autoridad formativa del mercado regional.</p>
+      </article>
+
+      <article class="lg:col-span-2 rounded-2xl border border-line bg-ink2/60 p-10 flex flex-col gap-6">
+        <div class="flex items-start justify-between">
+          <span class="font-serif text-[68px] text-gold" style="font-variation-settings:'opsz' 144; font-weight:400; line-height:1;">04</span>
+          <span class="font-mono text-[10px] tracking-[0.3em] text-goldsoft mt-3">SERVICIOS</span>
+        </div>
+        <h3 class="font-serif text-[24px] leading-[1.2] text-cream" style="font-variation-settings:'opsz' 144; font-weight:500;">Servicios <span class="italic-accent">profesionales.</span></h3>
+        <p class="text-[14.5px] leading-[1.75] text-body font-light">Marketing jurídico, tasaciones, asesoría notarial y servicios adyacentes. Comisión por derivación o fee fijo.</p>
+      </article>
+
+      <article class="lg:col-span-2 rounded-2xl border border-gold/35 bg-ink2/60 p-10 flex flex-col gap-6" style="box-shadow: 0 30px 80px -30px rgba(201,160,104,0.25);">
+        <div class="flex items-start justify-between">
+          <span class="font-serif text-[68px] text-gold" style="font-variation-settings:'opsz' 144; font-weight:400; line-height:1;">05</span>
+          <span class="font-mono text-[10px] tracking-[0.3em] text-goldsoft mt-3">PUBLICIDAD</span>
+        </div>
+        <h3 class="font-serif text-[24px] leading-[1.2] text-cream" style="font-variation-settings:'opsz' 144; font-weight:500;">Pauta de <span class="italic-accent">marcas.</span></h3>
+        <p class="text-[14.5px] leading-[1.75] text-body font-light">Bancos, constructoras, mueblerías, reformas, seguros. Pauta publicitaria, banners, contenido patrocinado. Tu tráfico SEO se convierte en un activo que monetiza a perpetuidad.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DIFERENCIADORES ================= -->
+<section class="relative py-[120px] lg:py-[160px]">
+  <div class="max-w-[1320px] mx-auto px-6 lg:px-10">
+    <div class="text-center reveal">
+      <div class="eyebrow mb-5">Por qué Enova</div>
+      <h2 class="display h-section text-cream max-w-[900px] mx-auto">No es otro CRM <span class="italic-accent">inmobiliario.</span></h2>
+    </div>
+
+    <div class="mt-20 grid lg:grid-cols-3 gap-12 reveal">
+      <div class="text-center">
+        <div class="inline-flex w-16 h-16 rounded-full border border-gold/40 items-center justify-center mb-6">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#C9A068" stroke-width="1.2">
+            <circle cx="14" cy="14" r="10"/><circle cx="14" cy="14" r="5"/><circle cx="14" cy="14" r="1.8" fill="#C9A068"/>
+          </svg>
+        </div>
+        <h3 class="font-serif text-[24px] text-cream max-w-[320px] mx-auto" style="font-variation-settings:'opsz' 144; font-weight:500;">No vendemos software. <span class="italic-accent">Vendemos dominio.</span></h3>
+        <p class="mt-5 text-[14.5px] leading-[1.75] text-body font-light max-w-[340px] mx-auto">Tokko y Witei te venden una herramienta. Nosotros te damos el sistema operativo — y te volvemos el centro gravitacional de tu mercado.</p>
+      </div>
+
+      <div class="text-center">
+        <div class="inline-flex w-16 h-16 rounded-full border border-gold/40 items-center justify-center mb-6">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#C9A068" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 10 L20 10 L17 7"/><path d="M20 10 L17 13"/>
+            <path d="M24 18 L8 18 L11 21"/><path d="M8 18 L11 15"/>
+          </svg>
+        </div>
+        <h3 class="font-serif text-[24px] text-cream max-w-[320px] mx-auto" style="font-variation-settings:'opsz' 144; font-weight:500;">Cobras cada mes. <span class="italic-accent">No solo cuando vendes.</span></h3>
+        <p class="mt-5 text-[14.5px] leading-[1.75] text-body font-light max-w-[340px] mx-auto">Pasas de cobrar cuando vendes a cobrar cada mes por cinco vías. Tu base de datos deja de ser un archivo. Se convierte en un activo que produce.</p>
+      </div>
+
+      <div class="text-center">
+        <div class="inline-flex w-16 h-16 rounded-full border border-gold/40 items-center justify-center mb-6">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#C9A068" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 3 L24 8 V15 C24 20 20 24 14 26 C8 24 4 20 4 15 V8 Z"/>
+            <path d="M10 14 L13 17 L18 11"/>
+          </svg>
+        </div>
+        <h3 class="font-serif text-[24px] text-cream max-w-[320px] mx-auto" style="font-variation-settings:'opsz' 144; font-weight:500;">Exclusividad regional. <span class="italic-accent">Un cliente por ciudad.</span></h3>
+        <p class="mt-5 text-[14.5px] leading-[1.75] text-body font-light max-w-[340px] mx-auto">Cuando firmas con Enova, tu competencia directa queda fuera. Te vendemos el dominio, no una licencia más.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIAL EDITORIAL ================= -->
+<section id="resultados" class="relative py-[120px] lg:py-[160px] overflow-hidden border-t border-line/70">
+  <div class="max-w-[1320px] mx-auto px-6 lg:px-10">
+    <div class="grid lg:grid-cols-12 gap-14 items-center reveal">
+      <div class="lg:col-span-6">
+        <div class="relative rounded-3xl overflow-hidden aspect-[4/5]" style="box-shadow: 0 40px 100px -30px rgba(0,0,0,0.8);">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80" alt="Proyecto inmobiliario Enova" class="w-full h-full object-cover"/>
+          <div class="absolute inset-0" style="background: linear-gradient(180deg, transparent 55%, rgba(11,13,18,0.85));"></div>
+          <div class="absolute bottom-6 left-6 right-6 flex items-end justify-between">
+            <div>
+              <div class="font-mono text-[10.5px] tracking-[0.22em] uppercase text-goldsoft">Hub Financiero</div>
+              <div class="mt-1 font-serif text-cream text-[22px]" style="font-variation-settings:'opsz' 144;">Agencia Regional · Iberia</div>
+            </div>
+            <span class="chip"><span class="dot-gold pulse"></span> En marcha</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-6">
+        <div class="eyebrow mb-5">Resultados</div>
+        <h2 class="display h-section text-cream">Lo que dicen<br/><span class="italic-accent">los dueños.</span></h2>
+
+        <div class="mt-10 relative pl-8">
+          <svg class="absolute -left-2 top-0" width="36" height="36" viewBox="0 0 36 36" fill="#C9A068" aria-hidden="true" opacity="0.6"><path d="M10 8 C 5 12 3 16 3 22 L3 28 L13 28 L13 18 L8 18 C 8 14 10 11 14 9 Z M24 8 C 19 12 17 16 17 22 L17 28 L27 28 L27 18 L22 18 C 22 14 24 11 28 9 Z"/></svg>
+          <blockquote class="font-serif text-[24px] lg:text-[28px] text-cream leading-[1.35]" style="font-variation-settings:'opsz' 144; font-weight:400;">
+            Dejamos de perseguir leads de Meta. <span class="italic-accent">Ahora los leads de nuestra ciudad vienen a nosotros.</span> En 90 días pasamos de una fuente de ingreso a cinco, sin contratar a nadie nuevo.
+          </blockquote>
+          <div class="mt-8 flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-goldwash to-gold/40 border border-gold/40"></div>
+            <div>
+              <div class="font-serif text-cream text-[16px]" style="font-variation-settings:'opsz' 144; font-weight:500;">Dueño · Agencia 37 agentes</div>
+              <div class="font-mono text-[10.5px] tracking-[0.22em] uppercase text-mute mt-1">Confidencial · Q4 2025</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-10 pt-8 border-t border-line flex items-center gap-8">
+          <div>
+            <div class="stat-num" style="font-size:56px;">+38<span class="text-gold">%</span></div>
+            <div class="text-[12px] text-mute mt-2 font-mono tracking-[0.2em] uppercase">Ingreso recurrente</div>
+          </div>
+          <div class="w-px h-12 bg-line"></div>
+          <div>
+            <div class="stat-num" style="font-size:56px;">90<span class="text-gold text-[28px]">d</span></div>
+            <div class="text-[12px] text-mute mt-2 font-mono tracking-[0.2em] uppercase">Time to value</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq" class="relative py-[120px] lg:py-[160px]">
+  <div class="max-w-[1100px] mx-auto px-6 lg:px-10">
+    <div class="text-center reveal">
+      <div class="eyebrow mb-5">Preguntas</div>
+      <h2 class="display h-section text-cream">Lo que preguntan<br/><span class="italic-accent">antes de entrar.</span></h2>
+    </div>
+
+    <div class="mt-16 reveal">
+      <details class="faq-item">
+        <summary class="flex items-start justify-between gap-8 py-7">
+          <span class="font-serif text-[20px] lg:text-[22px] text-cream leading-[1.3]" style="font-variation-settings:'opsz' 144; font-weight:500;">¿Esto no será otra plataforma más que nadie va a usar?</span>
+          <span class="chev mt-2 shrink-0" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#C9A068" stroke-width="1.5" stroke-linecap="round"><path d="M5 8 L10 13 L15 8"/></svg></span>
+        </summary>
+        <div class="faq-body pb-7 text-[15px] leading-[1.8] text-body font-light max-w-[820px]">
+          La mayoría fracasan porque son "agent-first" — diseñadas para que las use el vendedor. Enova es "owner-first": el dashboard está diseñado para ti, no para el equipo. El equipo la usa porque les simplifica vender, no porque se los pidas.
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary class="flex items-start justify-between gap-8 py-7">
+          <span class="font-serif text-[20px] lg:text-[22px] text-cream leading-[1.3]" style="font-variation-settings:'opsz' 144; font-weight:500;">¿Cuánto tarda la implementación?</span>
+          <span class="chev mt-2 shrink-0" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#C9A068" stroke-width="1.5" stroke-linecap="round"><path d="M5 8 L10 13 L15 8"/></svg></span>
+        </summary>
+        <div class="faq-body pb-7 text-[15px] leading-[1.8] text-body font-light max-w-[820px]">
+          30 días desde firma a operación completa. Primeros resultados medibles en 45 días.
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary class="flex items-start justify-between gap-8 py-7">
+          <span class="font-serif text-[20px] lg:text-[22px] text-cream leading-[1.3]" style="font-variation-settings:'opsz' 144; font-weight:500;">¿Qué pasa si me salgo? ¿Me quedo con mis datos?</span>
+          <span class="chev mt-2 shrink-0" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#C9A068" stroke-width="1.5" stroke-linecap="round"><path d="M5 8 L10 13 L15 8"/></svg></span>
+        </summary>
+        <div class="faq-body pb-7 text-[15px] leading-[1.8] text-body font-light max-w-[820px]">
+          Sí. 100% tuyos. Exportación estándar (CSV, JSON) en cualquier momento. Contrato sin lock-in tecnológico.
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary class="flex items-start justify-between gap-8 py-7">
+          <span class="font-serif text-[20px] lg:text-[22px] text-cream leading-[1.3]" style="font-variation-settings:'opsz' 144; font-weight:500;">¿Mis agentes se van a resistir?</span>
+          <span class="chev mt-2 shrink-0" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#C9A068" stroke-width="1.5" stroke-linecap="round"><path d="M5 8 L10 13 L15 8"/></svg></span>
+        </summary>
+        <div class="faq-body pb-7 text-[15px] leading-[1.8] text-body font-light max-w-[820px]">
+          El despliegue incluye onboarding estructurado. Curva típica de adopción: 7–10 días. Lo hicimos al revés del mercado: diseñamos la plataforma para que le ahorre tiempo al equipo, no para que a ti te dé reportes. Por eso no se resisten.
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary class="flex items-start justify-between gap-8 py-7">
+          <span class="font-serif text-[20px] lg:text-[22px] text-cream leading-[1.3]" style="font-variation-settings:'opsz' 144; font-weight:500;">¿Trabajan con varias inmobiliarias en mi ciudad?</span>
+          <span class="chev mt-2 shrink-0" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#C9A068" stroke-width="1.5" stroke-linecap="round"><path d="M5 8 L10 13 L15 8"/></svg></span>
+        </summary>
+        <div class="faq-body pb-7 text-[15px] leading-[1.8] text-body font-light max-w-[820px]">
+          No. Exclusividad regional — un cliente por mercado. Si alguien de tu competencia firma primero, tu ciudad queda cerrada.
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary class="flex items-start justify-between gap-8 py-7">
+          <span class="font-serif text-[20px] lg:text-[22px] text-cream leading-[1.3]" style="font-variation-settings:'opsz' 144; font-weight:500;">¿Cuánto cuesta?</span>
+          <span class="chev mt-2 shrink-0" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#C9A068" stroke-width="1.5" stroke-linecap="round"><path d="M5 8 L10 13 L15 8"/></svg></span>
+        </summary>
+        <div class="faq-body pb-7 text-[15px] leading-[1.8] text-body font-light max-w-[820px]">
+          Tras el diagnóstico gratuito de 30 min, enviamos propuesta personalizada según el tamaño de tu operación y las fuentes de ingreso activables. Rango: 4 cifras mensuales.
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA FINAL ================= -->
+<section id="cta-final" class="relative py-[120px] lg:py-[160px] overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true" style="background: radial-gradient(800px 500px at 50% 50%, rgba(201,160,104,0.22), transparent 70%);"></div>
+  <div class="max-w-[1100px] mx-auto px-6 lg:px-10 relative text-center reveal">
+    <div class="eyebrow mb-6">Disponibilidad Limitada</div>
+    <h2 class="display text-cream" style="font-size: clamp(44px, 6.2vw, 84px);">
+      Abrimos <span class="italic-accent">3 diagnósticos</span> por<br/>
+      semana. Reserva el tuyo.
+    </h2>
+    <p class="mt-10 text-[18px] leading-[1.7] text-body font-light max-w-[620px] mx-auto">
+      30 minutos. Gratis. Te sales con el mapa de las cinco fuentes de ingreso dormidas en tu inmobiliaria — y un plan claro de cómo encenderlas.
+    </p>
+
+    <div class="mt-12 flex flex-wrap justify-center items-center gap-5">
+      <a href="#" class="btn-gold inline-flex items-center gap-3 px-10 h-[62px] text-[15px] font-medium tracking-wide">
+        Agendar mi diagnóstico
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5L11 7 7.5 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#fuentes" class="btn-ghost inline-flex items-center gap-2 px-8 h-[62px] text-[14px] font-medium tracking-wide">
+        Ver las 5 fuentes
+      </a>
+    </div>
+
+    <p class="mt-8 font-mono text-[11px] tracking-[0.22em] uppercase text-mute">Sin llamadas de venta · Sin compromisos · Informe garantizado</p>
+
+    <div class="mt-16 grid grid-cols-3 gap-4 max-w-[720px] mx-auto">
+      <div class="border border-line rounded-xl p-5 bg-ink2/60 text-left">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-gold">Slot 01</div>
+        <div class="mt-2 font-serif text-cream text-[18px]" style="font-variation-settings:'opsz' 144;">Mar · 10:00</div>
+      </div>
+      <div class="border border-line rounded-xl p-5 bg-ink2/60 text-left">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-gold">Slot 02</div>
+        <div class="mt-2 font-serif text-cream text-[18px]" style="font-variation-settings:'opsz' 144;">Jue · 16:30</div>
+      </div>
+      <div class="border border-line rounded-xl p-5 bg-ink2/60 text-left">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-gold">Slot 03</div>
+        <div class="mt-2 font-serif text-cream text-[18px]" style="font-variation-settings:'opsz' 144;">Vie · 09:00</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="relative border-t border-line">
+  <div class="max-w-[1320px] mx-auto px-6 lg:px-10 py-14">
+    <div class="grid lg:grid-cols-12 gap-10">
+      <div class="lg:col-span-5">
+        <a href="#top" class="flex items-center gap-2.5" aria-label="Enova">
+          <span class="font-serif text-[26px] text-cream" style="font-variation-settings:'opsz' 144; font-weight:500;">en<span class="logo-o">o</span>va</span>
+        </a>
+        <p class="mt-5 font-serif italic text-[17px] text-body max-w-[380px]" style="font-variation-settings:'opsz' 144;">Ecosistemas de innovación inmobiliaria. PropTech Ecosystem as a Service.</p>
+      </div>
+      <div class="lg:col-span-2">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-mute mb-4">Producto</div>
+        <ul class="space-y-3 text-[14px] text-body">
+          <li><a href="#metodo" class="hover:text-cream transition-colors">Método</a></li>
+          <li><a href="#fuentes" class="hover:text-cream transition-colors">Fuentes</a></li>
+          <li><a href="#resultados" class="hover:text-cream transition-colors">Resultados</a></li>
+        </ul>
+      </div>
+      <div class="lg:col-span-2">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-mute mb-4">Compañía</div>
+        <ul class="space-y-3 text-[14px] text-body">
+          <li><a href="#" class="hover:text-cream transition-colors">Sobre Enova</a></li>
+          <li><a href="#faq" class="hover:text-cream transition-colors">FAQ</a></li>
+          <li><a href="#" class="hover:text-cream transition-colors">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="lg:col-span-3">
+        <div class="font-mono text-[11px] tracking-[0.22em] uppercase text-mute mb-4">Contacto</div>
+        <p class="text-[14px] text-body leading-[1.7]">diagnostico@enova.co<br/>+ LATAM · Iberia</p>
+      </div>
+    </div>
+    <div class="mt-14 pt-8 border-t border-line flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-[12px] text-mute">© 2026 Enova. Todos los derechos reservados.</p>
+      <div class="flex items-center gap-6 text-[12px] text-mute">
+        <a href="#" class="hover:text-cream transition-colors">Privacidad</a>
+        <a href="#" class="hover:text-cream transition-colors">Términos</a>
+        <span class="font-mono tracking-[0.22em] uppercase">Hub · v2.0</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</main>
+
+<script>
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
